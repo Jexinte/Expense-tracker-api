@@ -66,7 +66,7 @@ class Session
 
     /**
      * Summary of getSessionData
-     * @return array
+     * @return array<mixed>
      */
     public function getSessionData(): array
     {

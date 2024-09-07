@@ -16,23 +16,6 @@ namespace Util;
 
 class Request
 {
-    /**
-     * Summary of post
-     * @return array<string>
-     */
-    public function post(): array
-    {
-        return $_POST;
-    }
-
-    /**
-     * Summary of get
-     * @return array<string>
-     */
-    public function get(): array
-    {
-        return $_GET;
-    }
 
     /**
      * Summary of uri
@@ -53,7 +36,7 @@ class Request
     }
     /**
      * Summary of session
-     * @return array
+     * @return array<mixed>
      */
     public function session(): array
     {
