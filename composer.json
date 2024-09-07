@@ -1,0 +1,66 @@
+{
+    "name": "mamad/expense-tracker-api",
+    "description": "It's an API that allows users to CRUD expenses and filter them",
+    "require-dev": {
+        "phpstan/phpstan": "^1.12",
+        "phpro/grumphp": "^2.7",
+        "squizlabs/php_codesniffer": "^3.10",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpunit/phpunit": "^11",
+        "twig/twig": "^3.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mamad\\ExpenseTrackerApi\\": "src/",
+            "Config\\": "config/",
+            "Controller\\":"src/Controller/",
+            "Entity\\": "src/Entity",
+            "Enumeration\\": "src/Enumeration/",
+            "Enumeration\\Regex\\Expense\\": "src/Enumeration/Regex/Expense",
+            "Enumeration\\Regex\\Password\\": "src/Enumeration/Regex/Password",
+            "Enumeration\\Regex\\Route\\": "src/Enumeration/Regex/Route",
+            "Enumeration\\Regex\\Username\\": "src/Enumeration/Regex/Username",
+            "Enumeration\\Message\\": "src/Enumeration/Message/",
+            "Enumeration\\Database\\": "src/Enumeration/Database/",
+            "Enumeration\\RequestMethod\\": "src/Enumeration/RequestMethod/",
+            "Enumeration\\Status\\": "src/Enumeration/Status/",
+            "Router\\":"src/Router/",
+            "Repository\\": "src/Repository/",
+            "Service\\": "src/Service/",
+            "Util\\":"Util/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yokke",
+            "email": "mdembelepro@gmail.com"
+        }
+    ],
+    "scripts": {
+        "fix-src-style": "./vendor/bin/php-cs-fixer fix src --config=.php-cs-fixer.php",
+        "fix-tests-style": "./vendor/bin/php-cs-fixer fix tests --config=.php-cs-fixer.php",
+        "fix-config-style": "./vendor/bin/php-cs-fixer fix config --config=.php-cs-fixer.php",
+        "fix-util-style": "./vendor/bin/php-cs-fixer fix Util --config=.php-cs-fixer.php",
+        "fix-manager-style": "./vendor/bin/php-cs-fixer fix Manager --config=.php-cs-fixer.php",
+        "fix-router-style": "./vendor/bin/php-cs-fixer fix Router --config=.php-cs-fixer.php",
+        "all-tests" :"./vendor/bin/phpunit tests",
+        "g-run":"./vendor/bin/grumphp run",
+        "d-load":"composer dump-autoload"
+    },
+    "scripts-descriptions": {
+        "fix-src-style": "use php-cs-fixer to apply PSR-12 principles on src folder files",
+        "fix-tests-style": "use php-cs-fixer to apply PSR-12 principles on tests folder files",
+        "fix-config-style": "use php-cs-fixer to apply PSR-12 principles on config folder files",
+        "fix-util-style": "use php-cs-fixer to apply PSR-12 principles on util folder files",
+        "fix-manager-style": "use php-cs-fixer to apply PSR-12 principles on manager folder files",
+        "fix-router-style": "use php-cs-fixer to apply PSR-12 principles on router folder files",
+        "all-tests": "run all tests with phpunit",
+        "g-run": "run a checklist based on phpstan configuration and prevent commit if some fixes are needed",
+        "d-load": "update psr-4 new namespaces"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
+    }
+}
