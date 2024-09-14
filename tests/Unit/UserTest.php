@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Test;
+
 use Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -44,5 +47,4 @@ class UserTest extends TestCase
     {
         $this->assertSame("test", $this->user->getPassword());
     }
-
 }

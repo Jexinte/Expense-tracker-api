@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Manager;
+
 use Util\Request;
 
 /**
@@ -13,15 +15,15 @@ use Util\Request;
  * @license  ISC License
  * @link     https://github.com/Jexinte/Expense-tracker-api
  */
+
 class Session
 {
     /**
      * Summary of __construct
-     * @param Util\Request $request
+     * @param Request $request
      */
     public function __construct(private Request $request)
     {
-
     }
 
     /**
@@ -34,7 +36,6 @@ class Session
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
-
     }
 
     /**

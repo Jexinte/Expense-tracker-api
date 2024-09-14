@@ -16,15 +16,14 @@ namespace Entity;
 class User
 {
     public int $id;
-    
+
     /**
      * Summary of __construct
      * @param string $name
      * @param string $password
      */
-    public function __construct(public string $name,public string $password)
+    public function __construct(public string $name, public string $password)
     {
-
     }
 
     /**
@@ -32,7 +31,7 @@ class User
      * @param int $id
      * @return void
      */
-    public function setId(int $id):void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -42,7 +41,7 @@ class User
      * @return int
      */
 
-    public function getId():int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -51,7 +50,7 @@ class User
      * Summary of getName
      * @return string
      */
-    public function getName():string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -60,7 +59,7 @@ class User
      * Summary of getPassword
      * @return string
      */
-    public function getPassword():string
+    public function getPassword(): string
     {
         return $this->password;
     }
