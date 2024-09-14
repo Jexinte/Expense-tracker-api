@@ -1,7 +1,8 @@
 <?php
 
-
 declare(strict_types=1);
+
+namespace Enumeration\Message;
 
 /**
  * PHP version 8.3
@@ -21,5 +22,5 @@ enum User: string
     public const string WRONG_FORMAT_FOR_PASSWORD = "The password have to start with an uppercase letter !";
     public const string EMPTY_NAME = "The username field cannot be empty !";
     public const string EMPTY_PASSWORD = "The password field cannot be empty !";
-    public const string ALL_FIELDS_MUST_BE_FILLED = "All fields must be filled !";
+    public const string REGISTERED_SUCCESSFULLY = "User registered successfully !";
 }

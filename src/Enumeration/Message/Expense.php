@@ -25,6 +25,4 @@ enum Expense: string
     public const string CATEGORY_IS_NOT_A_STRING = "The category value have to be a string!";
     public const string WRONG_FORMAT_FOR_CATEGORY = "The category of the post have to start with an uppercase letter !";
     public const string EMPTY_CATEGORY = "The category field cannot be empty !";
-
-    public const string ALL_FIELDS_MUST_BE_FILLED = "All fields must be filled !";
 }

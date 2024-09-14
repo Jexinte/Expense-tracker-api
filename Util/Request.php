@@ -16,7 +16,6 @@ namespace Util;
 
 class Request
 {
-
     /**
      * Summary of uri
      * @return string
@@ -42,5 +41,4 @@ class Request
     {
         return $_SESSION;
     }
-
 }

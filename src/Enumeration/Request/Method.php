@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Enumeration\RequestMethod;
+namespace Enumeration\Request;
 
 /**
  * PHP version 8.3
@@ -20,5 +20,4 @@ enum Method: string
     public const string PUT = "PUT";
     public const string DELETE = "DELETE";
     public const string GET = "GET";
-
 }
