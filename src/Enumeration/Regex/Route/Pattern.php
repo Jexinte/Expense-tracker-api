@@ -15,7 +15,7 @@ namespace Enumeration\Regex\Route;
  */
 enum Pattern
 {
-    public const string SIGN_UP = '/expense-tracker-api\/public\/index\.php\/signup$/';
+    public const string SIGN_UP = '/expense-tracker-api\/public\/index\.php\/v1\/signup$/';
     public const string LOGIN = '/expense-tracker-api\/public\/index\.php\/login$/';
     public const string LOGOUT = '/expense-tracker-api\/public\/index\.php\/logout$/';
     public const string EXPENSES_LIST = '/expense-tracker-api\/public\/index\.php\/expenses$/';

@@ -16,8 +16,55 @@ use Enumeration\Status\Code;
  * @license  ISC License
  * @link     https://github.com/Jexinte/Expense-tracker-api
  */
+
 class ValidatorService
 {
+    /**
+     * Summary of isNoKeysPresents
+     * @param mixed $arrayOfDataFromjson
+     * @param array<mixed> $keysNameRequired
+     * @throws \Exception
+     * @return void
+     */
+    public function isNoKeysPresents(mixed $arrayOfDataFromjson, array $keysNameRequired): void
+    {
+        switch (true) {
+            case is_array($arrayOfDataFromjson):
+                $keys = array_keys($arrayOfDataFromjson);
+                if (empty($keys)) {
+                    http_response_code(Code::BAD_REQUEST);
+                    throw new Exception(
+                        "The following fields with their values are required in order to register a user : "
+                         . implode(',', $keysNameRequired),
+                        Code::BAD_REQUEST
+                    );
+                }
+                break;
+        }
+    }
+
+    /**
+     * Summary of checkMissingFields
+     * @param mixed $arrayOfDataFromjson
+     * @param array<mixed> $keysNameRequired
+     * @throws \Exception
+     * @return void
+     */
+    public function checkMissingFields(mixed $arrayOfDataFromjson, array $keysNameRequired): void
+    {
+        $this->isNoKeysPresents($arrayOfDataFromjson, $keysNameRequired);
+
+        $keys = array_keys($arrayOfDataFromjson);
+        foreach ($keysNameRequired as $fieldRequired) {
+            if (!in_array($fieldRequired, $keys)) {
+                http_response_code(Code::BAD_REQUEST);
+                throw new Exception(
+                    "The field $fieldRequired is missing in order to be register as user !",
+                    Code::BAD_REQUEST
+                );
+            }
+        }
+    }
     /**
      * Summary of isValueEmpty
      * @param string $message
@@ -70,44 +117,6 @@ class ValidatorService
             default:
                 http_response_code(Code::BAD_REQUEST);
                 throw new Exception($message, Code::BAD_REQUEST);
-        }
-    }
-
-    /**
-     * Summary of isUsernameOrPasswordValueIsNull
-     * @param mixed $value
-     * @throws \Exception
-     * @return void
-     */
-    public function isUsernameOrPasswordValueIsNull(mixed $value)
-    {
-        switch (true) {
-            case is_null($value):
-                http_response_code(Code::BAD_REQUEST);
-                throw new Exception('All fields must be filled !', Code::BAD_REQUEST);
-            case is_array($value):
-                $this->isUsernameOrPasswordKeyExist($value);
-                break;
-        }
-    }
-
-    /**
-     * Summary of isUsernameOrPasswordKeyExist
-     * @param array<string> $value
-     * @throws \Exception
-     * @return void
-     */
-    public function isUsernameOrPasswordKeyExist(array $value)
-    {
-        $username = array_key_exists('username', $value);
-        $password = array_key_exists('password', $value);
-
-        if (!$username || !$password) {
-            http_response_code(Code::BAD_REQUEST);
-            throw new Exception(
-                'In order to be register as user, fill the following fields: username and password',
-                Code::BAD_REQUEST
-            );
         }
     }
 

@@ -17,7 +17,7 @@ use Config\DatabaseConnection;
  * @license  ISC License
  * @link     https://github.com/Jexinte/Expense-tracker-api
  */
-class UserRepository
+readonly class UserRepository
 {
     /**
      * Summary of __construct
@@ -39,7 +39,7 @@ class UserRepository
         if (!$this->isUserAlreadyExist($user)) {
             $passwordHashed = password_hash($user->password, PASSWORD_BCRYPT);
             $req = $db->prepare("INSERT INTO user (name,password) VALUES(:name,:password)");
-            $req->bindValue('name', $user->name);
+            $req->bindValue('name', str_replace(' ', '', $user->name));
             $req->bindValue('password', $passwordHashed);
             $req->execute();
             return true;

@@ -22,7 +22,7 @@ use Enumeration\Regex\Password\Pattern as PasswordPattern;
  * @license  ISC License
  * @link     https://github.com/Jexinte/Expense-tracker-api
  */
-class UserController
+readonly class UserController
 {
     /**
      * Summary of __construct
@@ -36,12 +36,15 @@ class UserController
     /**
      * Summary of create
      * @param string $json
+     * @throws \Exception
      * @return void
      */
-    public function create(string $json)
+    public function create(string $json): void
     {
-        $array = json_decode($json, true);
-        $this->validatorService->isUsernameOrPasswordValueIsNull($array);
+        $arrFromJson = !empty(json_decode($json, true)) ? json_decode($json, true) : [];
+        $array = array_filter($arrFromJson, fn($k) => $k == "username" || $k == "password", ARRAY_FILTER_USE_KEY);
+        $keysNameRequired = ["username","password"];
+        $this->validatorService->checkMissingFields($array, $keysNameRequired);
 
         $isUsernameEmpty = $this->validatorService->isValueEmpty(
             UserMessage::EMPTY_NAME,
