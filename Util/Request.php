@@ -41,4 +41,14 @@ class Request
     {
         return $_SESSION;
     }
+
+    /**
+     * Summary of env
+     * @param string $key
+     * @return string
+     */
+    public function env(string $key = ''):string
+    {
+        return $_ENV[$key];
+    }
 }

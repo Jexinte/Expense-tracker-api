@@ -19,6 +19,7 @@ use PDOException;
 
 class DatabaseConnection
 {
+    private PDO $database;
     /**
      * Summary of __construct
      * @param string $host
@@ -32,20 +33,25 @@ class DatabaseConnection
         private readonly string $username,
         private readonly string $password
     ) {
+        try {
+            $this->database = new PDO(
+                'mysql:host=' . $this->host . ';dbname=' . $this->dbname,
+                $this->username,
+                $this->password
+            );
+            $this->database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo "Database Error :" . $e->getMessage();
+        }
     }
 
 
     /**
      * Summary of connect
-     * @return PDO|string
+     * @return \PDO|string
      */
     public function connect(): PDO|string
     {
-        try {
-            $db = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname, $this->username, $this->password);
-        } catch (PDOException $e) {
-            echo "Database Error :" . $e->getMessage();
-        }
-        return $db;
+        return $this->database;
     }
 }
