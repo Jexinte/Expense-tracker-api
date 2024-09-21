@@ -42,24 +42,35 @@ readonly class UserController
     public function create(string $json): void
     {
         $arrFromJson = !empty(json_decode($json, true)) ? json_decode($json, true) : [];
-        $array = array_filter($arrFromJson, fn($k) => $k == "username" || $k == "password", ARRAY_FILTER_USE_KEY);
+        $arrayWithUsernameAndPasswordValues = array_filter(
+            $arrFromJson,
+            fn ($k) => $k == "username" || $k == "password",
+            ARRAY_FILTER_USE_KEY
+        );
+
         $keysNameRequired = ["username","password"];
-        $this->validatorService->checkMissingFields($array, $keysNameRequired);
+        $this->validatorService->checkMissingFields(
+            $arrayWithUsernameAndPasswordValues,
+            $keysNameRequired
+        );
 
         $isUsernameEmpty = $this->validatorService->isValueEmpty(
             UserMessage::EMPTY_NAME,
-            $array["username"]
+            $arrayWithUsernameAndPasswordValues["username"]
         );
         $isUsernamePatternValid = $this->validatorService->isValueHaveTheRightPattern(
             UserPattern::FORMAT,
-            strval($array["username"]),
+            strval($arrayWithUsernameAndPasswordValues["username"]),
             UserMessage::WRONG_FORMAT_FOR_NAME
         );
 
-        $isPasswordEmpty = $this->validatorService->isValueEmpty(UserMessage::EMPTY_PASSWORD, $array['password']);
+        $isPasswordEmpty = $this->validatorService->isValueEmpty(
+            UserMessage::EMPTY_PASSWORD,
+            $arrayWithUsernameAndPasswordValues['password']
+        );
         $isPasswordPatternValid = $this->validatorService->isValueHaveTheRightPattern(
             PasswordPattern::FORMAT,
-            strval($array['password']),
+            strval($arrayWithUsernameAndPasswordValues['password']),
             UserMessage::WRONG_FORMAT_FOR_PASSWORD
         );
 
@@ -72,14 +83,22 @@ readonly class UserController
         );
 
         if ($everyFieldIsValid) {
-            $user = new User($array["username"], $array['password']);
+            $user = new User(
+                $arrayWithUsernameAndPasswordValues["username"],
+                $arrayWithUsernameAndPasswordValues['password']
+            );
             $userCreated = $this->userRepository->create($user);
 
             if ($userCreated) {
                 return;
             }
             http_response_code(Code::BAD_REQUEST);
-            throw new Exception('User ' . $array['username'] . ' already exist !', Code::BAD_REQUEST);
+            throw new Exception(
+                'User '
+                . $arrayWithUsernameAndPasswordValues['username'] .
+                ' already exist !',
+                Code::BAD_REQUEST
+            );
         }
     }
 }

@@ -34,7 +34,7 @@ class ValidatorService
                 if (empty($keys)) {
                     http_response_code(Code::BAD_REQUEST);
                     throw new Exception(
-                        "The following fields with their values are required in order to register a user : "
+                        "The following fields with their values are required : "
                          . implode(',', $keysNameRequired),
                         Code::BAD_REQUEST
                     );
@@ -59,7 +59,7 @@ class ValidatorService
             if (!in_array($fieldRequired, $keys)) {
                 http_response_code(Code::BAD_REQUEST);
                 throw new Exception(
-                    "The field $fieldRequired is missing in order to be register as user !",
+                    "The field $fieldRequired is missing !",
                     Code::BAD_REQUEST
                 );
             }
@@ -83,23 +83,7 @@ class ValidatorService
         }
     }
 
-    /**
-     * Summary of isValueAString
-     * @param string $message
-     * @param string $value
-     * @throws \Exception
-     * @return bool
-     */
-    public function isValueAString(string $message, string $value = "")
-    {
-        switch (true) {
-            case is_string($value):
-                return true;
-            default:
-                http_response_code(Code::BAD_REQUEST);
-                throw new Exception($message, Code::BAD_REQUEST);
-        }
-    }
+
 
     /**
      * Summary of isValueHaveTheRightPattern
