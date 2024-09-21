@@ -47,7 +47,7 @@ class Request
      * @param string $key
      * @return string
      */
-    public function env(string $key = ''):string
+    public function env(string $key = ''): string
     {
         return $_ENV[$key];
     }
