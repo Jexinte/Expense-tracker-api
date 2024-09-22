@@ -29,9 +29,9 @@ $router = new Router($request, $userController);
 
 try {
     ob_start();
+    header('Content-Type: application/json');
     $router->resolveRequest();
     ob_end_flush();
 } catch (Exception $e) {
     echo json_encode([$e->getCode() => $e->getMessage()]);
 }
-header('Content-Type: application/json');

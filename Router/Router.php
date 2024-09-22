@@ -34,17 +34,25 @@ class Router
     public function resolveRequest(): void
     {
         $uri = $this->request->uri();
-
+        $loader = new \Twig\Loader\FilesystemLoader('../templates/documentation');
+        $twig = new \Twig\Environment($loader, [
+            'cache' => false
+        ]);
         $input = fopen('php://input', 'w');
         $jsonContent = stream_get_contents($input);
-
+        $jsonResponse = [];
 
 
         switch (true) {
             case preg_match(Pattern::SIGN_UP, $uri):
                 $this->userController->create($jsonContent);
-                echo json_encode([Code::OK => User::REGISTERED_SUCCESSFULLY]);
+                $jsonResponse[Code::OK] = User::REGISTERED_SUCCESSFULLY;
+                break;
+            default:
+                header('Content-Type: text-plain');
+                echo $twig->render('base.twig');
                 break;
         }
+        echo json_encode($jsonResponse);
     }
 }
